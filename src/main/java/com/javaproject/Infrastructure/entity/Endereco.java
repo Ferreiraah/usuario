@@ -18,7 +18,7 @@ public class Endereco {
     private String rua;
     @Column(name = "numero")
     private String numero;
-    @Column(name = "complemento", length = 15)
+    @Column(name = "complemento", length = 255)
     private String complemento;
     @Column(name = "cidade", length = 100)
     private String cidade;
