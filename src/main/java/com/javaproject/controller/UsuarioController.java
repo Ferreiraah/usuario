@@ -3,8 +3,6 @@ package com.javaproject.controller;
 import com.javaproject.Infrastructure.entity.Usuario;
 import com.javaproject.Infrastructure.security.JwtUtil;
 import com.javaproject.business.UsuarioService;
-import com.javaproject.business.dto.EnderecoDTO;
-import com.javaproject.business.dto.TelefoneDTO;
 import com.javaproject.business.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +34,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<UsuarioDTO> buscarUsuarioPorEmail(@RequestParam("email") String email){
+    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam("email") String email){
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -44,35 +42,5 @@ public class UsuarioController {
     public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email){
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
-    }
-
-    @PutMapping
-    public ResponseEntity<UsuarioDTO> atualizarDadosUsuario(@RequestBody UsuarioDTO dto,
-                                                            @RequestHeader("Authorization")String token){
-        return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, dto));
-    }
-
-    @PutMapping("/endereco")
-    public ResponseEntity<EnderecoDTO> atualizarEndereco(@RequestBody EnderecoDTO dto,
-                                                         @RequestParam("id") Long id){
-        return  ResponseEntity.ok(usuarioService.atualizaEndereco(id,dto));
-    }
-
-    @PutMapping("/telefone")
-    public ResponseEntity<TelefoneDTO> atualizarEndereco(@RequestBody TelefoneDTO dto,
-                                                         @RequestParam("id") Long id){
-        return  ResponseEntity.ok(usuarioService.atualizaTelefone(id,dto));
-    }
-
-    @PostMapping("/endereco")
-    public ResponseEntity<EnderecoDTO> cadastraEndereco(@RequestBody EnderecoDTO dto,
-                                                        @RequestHeader("Authorization")String token){
-        return ResponseEntity.ok(usuarioService.cadastraEndereco(token,dto));
-    }
-
-    @PostMapping("/telefone")
-    public ResponseEntity<TelefoneDTO> cadastraTelefone(@RequestBody TelefoneDTO dto,
-                                                        @RequestHeader("Authorization")String token){
-        return ResponseEntity.ok(usuarioService.cadastraTelefone(token,dto));
     }
 }
