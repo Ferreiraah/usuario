@@ -94,4 +94,15 @@ public TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO) {
             .build();
 }
 
+public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity) {
+        return Usuario.builder()
+                .nome(usuarioDTO.getNome()!=null?usuarioDTO.getNome(): entity.getNome())
+                .id(usuarioDTO.getId())
+                .senha(usuarioDTO.getSenha()!=null ? usuarioDTO.getSenha(): entity.getSenha())
+                .email(usuarioDTO.getEmail()!=null ? usuarioDTO.getEmail(): entity.getEmail())
+                .enderecos(entity.getEnderecos())
+                .telefone(entity.getTelefone())
+                .build();
+}
+
 }
